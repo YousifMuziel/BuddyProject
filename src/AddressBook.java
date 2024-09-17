@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddressBook {
-    private List<BuddyInfo> buddies;
+    private final List<BuddyInfo> buddies;  // 'final' keyword added, and the list is initialized right away
 
     public AddressBook() {
         this.buddies = new ArrayList<>();
@@ -10,21 +10,26 @@ public class AddressBook {
 
     public void addBuddy(BuddyInfo buddy) {
         if (buddy != null) {
-            buddies.add(buddy);
+            this.buddies.add(buddy);
         }
     }
 
     public void removeBuddy(BuddyInfo buddy) {
-        buddies.remove(buddy);
+        this.buddies.remove(buddy);
+    }
+
+    public void displayBuddies() {
+        for (BuddyInfo buddy : this.buddies) {
+            System.out.println(buddy.getName());
+        }
     }
 
     public static void main(String[] args) {
         AddressBook addressBook = new AddressBook();
-        System.out.println("Address book");
-
-        // Create a BuddyInfo object
-        BuddyInfo buddy = new BuddyInfo("Homer");
+        BuddyInfo buddy = new BuddyInfo("Homer Simpson");
         addressBook.addBuddy(buddy);
+        System.out.println("Address Book:");
+        addressBook.displayBuddies(); // Display all buddies to address the warning
         addressBook.removeBuddy(buddy);
     }
 }
